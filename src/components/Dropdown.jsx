@@ -18,8 +18,15 @@ export function Dropdown({id}){
 
     function handleDisplayName(key){
         if(key === 'Enter'){
+            if(dropdownDisplayName === ''){
+                setDropdownDisplayName(`Dropdown ${id}`)
+            }
            setEnterPressed(true);
         }
+    }
+
+    function handleEditStatus(){
+        setEnterPressed(false);
     }
 
     function handleCheckBox(){
@@ -66,6 +73,12 @@ export function Dropdown({id}){
                                 onClick={() => handledropdownElementsList()}
                             >
                                 add
+                        </button>
+                        <button 
+                                className='dropdown-add-btn'
+                                onClick={() => handleEditStatus()}
+                            >
+                                edit
                         </button>
                     </div>
                     <div onClick={() => handleCheckBox()}>
