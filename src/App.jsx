@@ -8,22 +8,35 @@ function App() {
 
   function handleElementsList(){
 
-    const element = <Dropdown key={elementsList.length} title="dsds"/>;
+    const element = <Dropdown key={elementsList.length} id={elementsList.length}/>;
 
-    setElementsList(prevState => [...prevState, element])
+      setElementsList(prevState => [...prevState, element])
+  }
+
+  function handleDeleteDropdown(){
+    setElementsList(prevState => prevState.filter(element => element.props.id !== elementsList.length - 1))
   }
 
   return (
     <div className="container">
         <div className="checklist">
           <h1 className="checklist-title">CheckList</h1>
-          <button 
-            className='checklist-btn'
-            onClick={() => handleElementsList()}
-          >
-            
-            Add Dropdown
-          </button>
+          <div style={{display: 'flex'}}>
+            <button
+              className='checklist-btn'
+              onClick={() => handleElementsList()}
+            >
+              
+              Add Dropdown
+            </button>
+            <button 
+              className='checklist-btn'
+              onClick={() => handleDeleteDropdown()}
+            >
+              
+              Delete Dropdown
+            </button>
+          </div>
           {elementsList}
         </div>
     </div>

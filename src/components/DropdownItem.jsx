@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export function DropdownItem(props){
+export function DropdownItem({id, title, handleDeleteDropdownItems}){
 
     const [editStatus, setEditStatus] = useState(false);
-    const [elementName, setElementName] = useState(props.title);
+    const [elementName, setElementName] = useState(title);
 
     const inputToChangeElementName = <input 
         type="text" 
@@ -32,7 +32,7 @@ export function DropdownItem(props){
             <div>
                 <button 
                     className="dropdown-item-btn"
-                    onClick={() => {}}
+                    onClick={() => handleDeleteDropdownItems(id)}
                 >
                     Delete
                 </button>

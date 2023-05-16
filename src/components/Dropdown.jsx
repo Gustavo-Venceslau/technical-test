@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai'
 import { DropdownItem } from './DropdownItem';
 
-export function Dropdown(){
+export function Dropdown({id}){
 
     const [isActive, setIsActive] = useState(false);
     const [dropdownDisplayName, setDropdownDisplayName] = useState('');
@@ -31,15 +31,23 @@ export function Dropdown(){
     /* handle dropdown items */
 
     const [dropdownElementsList, setDropdownElementsList] = 
-        useState([<DropdownItem title='Option 1'/>, <DropdownItem title='Option 2'/>]);
+        useState([<DropdownItem key={0} id={0} handleDeleteDropdownItems={handleDeleteDropdownItems} title={`Option ${0}`}/>,
+                  <DropdownItem key={1} id={1} handleDeleteDropdownItems={handleDeleteDropdownItems} title={`Option ${1}`}/>]);
 
     function handledropdownElementsList(){
-        setDropdownElementsList(prevState => [...prevState, <DropdownItem title='Option 1'/>]);
+        setDropdownElementsList(prevState => 
+            [...prevState, 
+                <DropdownItem 
+                    key={dropdownElementsList.length} 
+                    id={dropdownElementsList.length}
+                    handleDeleteDropdownItems={handleDeleteDropdownItems} 
+                    title={`Option ${dropdownElementsList.length}`}
+                />]);
     }
 
-    useEffect(() => {
-
-    }, [])
+    function handleDeleteDropdownItems(dropdownKey){
+        setDropdownElementsList(prevState => prevState.filter(Element => Element.props.id !== dropdownKey));
+    }
 
     return(
         <div className="dropdown">
